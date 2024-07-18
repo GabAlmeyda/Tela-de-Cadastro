@@ -1,9 +1,10 @@
-from window_interface import WindowInterface
-from tkinter import *
+from tkinter import *  # type: ignore
 from tkinter import ttk
+from .window_interface import WindowInterface
+from ..functions import Functions
 
 
-class StartWindow(WindowInterface):
+class StartWindow(WindowInterface, Functions):
 
     def screen(self) -> None:
         self.root.title("NOME DA EMPRESA")
@@ -19,12 +20,18 @@ class StartWindow(WindowInterface):
     def _createButtons(self) -> None:
         self.enter_bt = Button(self.root, text="Entrar com sua conta")
         self.enter_bt.configure(bg="#8F00FF", font=(
-            "verdana", 15, "bold"), fg="white")
+            "verdana", 15, "bold"), fg="white", activebackground="#530391",
+            activeforeground="white", bd=0)
+        self.enter_bt.bind("<Enter>", self.focusIn)
+        self.enter_bt.bind("<Leave>", self.focusOut)
         self.enter_bt.place(relx=0.2, rely=0.57, relwidth=0.6, relheight=0.1)
 
         self.enter_bt = Button(self.root, text="Cadastrar uma nova conta")
         self.enter_bt.configure(bg="#FF003D", font=(
-            "verdana", 15, "bold"), fg="white")
+            "verdana", 15, "bold"), fg="white", activebackground="#ab022a",
+            activeforeground="white", bd=0)
+        self.enter_bt.bind("<Enter>", self.focusIn)
+        self.enter_bt.bind("<Leave>", self.focusOut)
         self.enter_bt.place(relx=0.2, rely=0.81, relwidth=0.6, relheight=0.1)
 
     def _createEntrys(self) -> None:
@@ -51,8 +58,3 @@ class StartWindow(WindowInterface):
         self.enter_lb.configure(bg="#0d0d0d", font=(
             "verdana", 15, "bold"), fg="white")
         self.enter_lb.place(relx=0.25, rely=0.74, relwidth=0.5, relheight=0.06)
-
-
-if __name__ == "__main__":
-    janela = StartWindow()
-    janela.run()

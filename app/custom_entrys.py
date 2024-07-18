@@ -1,11 +1,12 @@
-from tkinter import *
+from tkinter import *  # type: ignore
 from tkinter import ttk
 
-class PlaceHolder(Entry):
 
-    def __ini__(self, master=None, placeholder="INSERT YOUR PLACEHOLDER HERE", bg="#0D0D0D", 
-                font=("verdana", 8, "bold"), fg="white", validate="key", validatecommand="", 
-                color="light gray"):
+class EntryPlaceHolder(Entry):
+
+    def __init__(self, master=None, placeholder="INSERT YOUR PLACEHOLDER HERE", bg="white",
+                 font=("verdana", 8, "bold"), fg="black", validate="key", validatecommand="",
+                 color="gray"):
         super().__init__(master)
         self.placeholder = placeholder
         self.default_color = fg
@@ -20,7 +21,7 @@ class PlaceHolder(Entry):
         self.put_placeholder()
         self.estado = True
 
-    def foc_in(self) -> None:
+    def foc_in(self, *args) -> None:
         if self.estado:
             self.delete(0, END)
             self["fg"] = self.default_color
@@ -28,7 +29,7 @@ class PlaceHolder(Entry):
             self["validatecommand"] = self.validatecommand
             self.estado = False
 
-    def foc_out(self) -> None:
+    def foc_out(self, *args) -> None:
         if not self.get():
             self.put_placeholder()
             self.estado = True
