@@ -39,7 +39,3 @@ class PlaceHolder(Entry):
         self["fg"] = self.placeholder_color
         self.insert(0, self.placeholder)
         self.estado = True
-
-
-class BorderEntry:
-    pass
