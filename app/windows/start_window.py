@@ -20,7 +20,7 @@ class StartWindow(WindowInterface, Functions):
     def _createButtons(self) -> None:
         self.enter_bt = Button(self.root, text="Entrar com sua conta")
         self.enter_bt.configure(bg="#8F00FF", font=(
-            "verdana", 15, "bold"), fg="white", activebackground="#530391",
+            "Arial", 15, "bold"), fg="white", activebackground="#530391",
             activeforeground="white", bd=0)
         self.enter_bt.bind("<Enter>", self.focusIn)
         self.enter_bt.bind("<Leave>", self.focusOut)
@@ -28,7 +28,7 @@ class StartWindow(WindowInterface, Functions):
 
         self.enter_bt = Button(self.root, text="Cadastrar uma nova conta")
         self.enter_bt.configure(bg="#FF003D", font=(
-            "verdana", 15, "bold"), fg="white", activebackground="#ab022a",
+            "Arial", 15, "bold"), fg="white", activebackground="#ab022a",
             activeforeground="white", bd=0)
         self.enter_bt.bind("<Enter>", self.focusIn)
         self.enter_bt.bind("<Leave>", self.focusOut)
@@ -45,7 +45,7 @@ class StartWindow(WindowInterface, Functions):
 
         self.enter_lb = Label(self.root, text="Já tem uma conta na Empresa?")
         self.enter_lb.configure(bg="#0d0d0d", font=(
-            "verdana", 15, "bold"), fg="white")
+            "Arial", 15, "bold"), fg="white")
         self.enter_lb.place(relx=0.25, rely=0.5, relwidth=0.5, relheight=0.06)
 
         self.line_lb = Label(
@@ -56,5 +56,5 @@ class StartWindow(WindowInterface, Functions):
 
         self.enter_lb = Label(self.root, text="Ainda não fez sua conta?")
         self.enter_lb.configure(bg="#0d0d0d", font=(
-            "verdana", 15, "bold"), fg="white")
+            "Arial", 15, "bold"), fg="white")
         self.enter_lb.place(relx=0.25, rely=0.74, relwidth=0.5, relheight=0.06)
