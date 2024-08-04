@@ -39,9 +39,9 @@ class StartWindow(WindowInterface, Functions):
 
     def _createLabels(self) -> None:
         self.logo_lb = Label(self.root, text="Empresa")
-        self.logo_lb.configure(bg="#0d0d0d", font=(
-            "Times New Roman", 30, "bold"), fg="white")
-        self.logo_lb.place(relx=0.38, rely=0.08, relwidth=0.22, relheight=0.1)
+        self.logo_lb.configure(bg="#0D0D0D", font=(
+            "Times New Roman", 45, "bold"), fg="white")
+        self.logo_lb.place(relx=0.325, rely=0.08, relwidth=0.35, relheight=0.13)
 
         self.enter_lb = Label(self.root, text="Já tem uma conta na Empresa?")
         self.enter_lb.configure(bg="#0d0d0d", font=(

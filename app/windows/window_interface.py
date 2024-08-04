@@ -20,8 +20,8 @@ class WindowInterface(ABC):
             Deve reunir todos os comandos para os widgets da tela, com labels, entrys, botões etc. Preferencialmente, esse método deve
         apenas executar os métodos "createLabels", "createButtons" e "createEntrys".
         """
-        self._createButtons()
         self._createEntrys()
+        self._createButtons()
         self._createLabels()
         raise Exception("Deve ser implementado o método 'widgets'")
     
