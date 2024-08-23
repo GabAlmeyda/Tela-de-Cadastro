@@ -1,4 +1,3 @@
-"""
     Projeto-Base:
         * Quatro telas:
             * Uma de entrada, para entrar se tiver conta ou fazer uma;
@@ -8,4 +7,3 @@
 
         * A Tela de Entrada leva para a Tela de Login e a Tela de Cadastro, podendo voltar se quiser;
         * A Tela de Login e a Tela de Cadastro devem levar para a Tela do App;
-"""
