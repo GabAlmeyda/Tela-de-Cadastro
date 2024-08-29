@@ -1,7 +1,7 @@
 from tkinter import *  # type: ignore
 from tkinter import ttk
 from .window_interface import WindowInterface
-from ..functions import Functions
+from ..allFunctions.functions import Functions
 from ..custom_entrys import EntryPlaceHolder
 
 
