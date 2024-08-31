@@ -49,7 +49,7 @@ class StartWindow(WindowInterface, Functions):
         self.enter_lb.place(relx=0.25, rely=0.5, relwidth=0.5, relheight=0.06)
 
         self.line_lb = Label(
-            self.root, text="____________________________________________________________________________________________")
+            self.root, text=("_" * 92))
         self.line_lb.configure(bg="#0d0d0d", fg="white",
                                font=("verdana", 15, "bold"))
         self.line_lb.place(relx=0.15, rely=0.67, relwidth=0.7, relheight=0.05)

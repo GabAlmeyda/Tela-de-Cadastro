@@ -24,14 +24,30 @@ class DBManager(DBManagerInterface):
 
     def addAccount(self):
         self._variables()
-        self.connection()
-        self.cursor.execute("""
-            INSERT INTO Accounts(name, surname, email, password) VALUES(?, ?, ?, ?)
-        """, (self.name, self.surname, self.email, self.password))
-        self.conn.commit()
-        self.disconnection()
+        registration = self._accountRegistration(self.email, self.password)
+        if not registration:
+            self.connection()
+            self.cursor.execute("""
+                INSERT INTO Accounts(name, surname, email, password) VALUES(?, ?, ?, ?)
+            """, (self.name, self.surname, self.email, self.password))
+            self.conn.commit()
+            # TODO: colocar o método para ir pro app
+            self.disconnection()
+        else:
+            # TODO: colocar um balão de erro para caso já existir a conta, ou algo assim
+            pass
 
-    def _verifyAccount(self, email: str, password: str) -> bool:
+    def verifyAccount(self):
+        self._variables()
+        registration = self._accountRegistration(self.email, self.password)
+        if registration:
+            # TODO: colocar o método para ir pro app
+            pass
+        else:
+            # TODO: colocar um balão de erro para caso não existir a conta, ou algo assim
+            pass
+
+    def _accountRegistration(self, email: str, password: str) -> bool:
         self._variables()
         self.connection()
         self.cursor.execute(f"""
@@ -46,6 +62,9 @@ class DBManager(DBManagerInterface):
         return False
 
     def _variables(self):
+        """
+        Gets all the values in the entrys.
+        """
         self.name = self.et_name.get()
         self.surname = self.et_surname.get()
         self.email = self.et_email.get()
