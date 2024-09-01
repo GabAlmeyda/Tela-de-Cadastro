@@ -42,6 +42,16 @@ class Functions:
             self.et_password["highlightbackground"] = "white"
             self.et_password["fg"] = "white"
 
+    def goToAppWindow(self, root: Tk):
+        """
+        Destroys the actual window
+
+        Args:
+            root (Tk): the actual window 
+        """
+        root.destroy()
+
+
     def _releaseButtonLogin(self, event=None):
         """
         Activate the button when the email and password field are not empty

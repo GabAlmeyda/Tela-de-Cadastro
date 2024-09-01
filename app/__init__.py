@@ -1,3 +1,2 @@
-from .windows import StartWindow
-from .windows import LoginWindow
+from .windows import StartWindow, LoginWindow, AppWindow
 from .allFunctions.functions import Functions
