@@ -33,7 +33,7 @@ class Functions:
         Validates the entered password to create an account. A good password has more than four characters.
 
         Args:
-            password (str): the entered password
+            password (str): the entered password.
         """
         if len(password) < 4:
             self.et_password["highlightcolor"] = self.et_password["highlightbackground"] = self.et_password["fg"] = "red"
@@ -42,19 +42,41 @@ class Functions:
             self.et_password["highlightbackground"] = "white"
             self.et_password["fg"] = "white"
 
+    def confirmPassword(self, event) -> bool:
+        """
+        Confirms whether the both passwords are the same.
+
+        Returns:
+            bool: returns True if the both passwords are not the same, otherwise it returns False.
+        """
+        password = self.et_password.get()
+        password2 = self.et_password2.get()
+        if not (self.et_password.estado or self.et_password2.estado):
+            if password != password2:
+                self.et_password["highlightcolor"] = self.et_password["highlightbackground"] = self.et_password["fg"] = "red"
+                self.et_password2["highlightcolor"] = self.et_password2["highlightbackground"] = self.et_password2["fg"] = "red"
+                return False
+            else:
+                self.et_password["highlightcolor"] = "#FF003D"
+                self.et_password["highlightbackground"] = "white"
+                self.et_password["fg"] = "white"
+                self.et_password2["highlightcolor"] = "#FF003D"
+                self.et_password2["highlightbackground"] = "white"
+                self.et_password2["fg"] = "white"
+                return True
+
     def goToAppWindow(self, root: Tk):
         """
-        Destroys the actual window
+        Destroys the actual window and goes to the App Window.
 
         Args:
-            root (Tk): the actual window 
+            root (Tk): the actual window.
         """
         root.destroy()
 
-
     def _releaseButtonLogin(self, event=None):
         """
-        Activate the button when the email and password field are not empty
+        Activate the button when the email and password field are not empty.
         """
 
         email = self.et_email.get()
@@ -70,13 +92,13 @@ class Functions:
         Changes the color between a lightest or a darker color, based on the colors registered in the color dictionary.
 
         Args:
-            actual_color (str): the actual color of the widget
+            actual_color (str): the actual color of the widget.
 
         Raises:
-            Exception: if the color pair does not exists, raises a exception
+            Exception: if the color pair does not exists, raises a exception.
 
         Returns:
-            str: the other color from the color pair of the color dictionary
+            str: the other color from the color pair of the color dictionary.
         """
         for color_tuple in self.colors.values():
             if color_tuple[0] == actual_color:

@@ -2,6 +2,37 @@ from .db_functions_interface import DBManagerInterface
 import sqlite3
 
 class DBManager(DBManagerInterface):
+
+
+    def verifyAccount(self):
+        self.email = self.et_email.get()
+        self.password = self.et_password.get()
+        registration = self._accountRegistration(self.email, self.password)
+        if registration:
+            # TODO: colocar o método para ir pro app
+            pass
+        else:
+            # TODO: colocar um balão de erro para caso não existir a conta, ou algo assim
+            pass
+
+    def addAccount(self):
+        self.name = self.et_name.get()
+        self.surname = self.et_surname.get()
+        self.email = self.et_email.get()
+        self.password = self.et_password.get()
+        registration = self._accountRegistration(self.email, self.password)
+        if not registration:
+            self.connection()
+            self.cursor.execute("""
+                INSERT INTO Accounts(name, surname, email, password) VALUES(?, ?, ?, ?)
+            """, (self.name, self.surname, self.email, self.password))
+            self.conn.commit()
+            # TODO: colocar o método para ir pro app
+            self.disconnection()
+        else:
+            # TODO: colocar um balão de erro para caso já existir a conta, ou algo assim
+            pass
+
     def connection(self):
         self.conn = sqlite3.connect("Accounts.db")
         self.cursor = self.conn.cursor()
@@ -22,33 +53,7 @@ class DBManager(DBManagerInterface):
         self.conn.commit()
         self.disconnection()
 
-    def addAccount(self):
-        self._variables()
-        registration = self._accountRegistration(self.email, self.password)
-        if not registration:
-            self.connection()
-            self.cursor.execute("""
-                INSERT INTO Accounts(name, surname, email, password) VALUES(?, ?, ?, ?)
-            """, (self.name, self.surname, self.email, self.password))
-            self.conn.commit()
-            # TODO: colocar o método para ir pro app
-            self.disconnection()
-        else:
-            # TODO: colocar um balão de erro para caso já existir a conta, ou algo assim
-            pass
-
-    def verifyAccount(self):
-        self._variables()
-        registration = self._accountRegistration(self.email, self.password)
-        if registration:
-            # TODO: colocar o método para ir pro app
-            pass
-        else:
-            # TODO: colocar um balão de erro para caso não existir a conta, ou algo assim
-            pass
-
     def _accountRegistration(self, email: str, password: str) -> bool:
-        self._variables()
         self.connection()
         self.cursor.execute(f"""
             SELECT email, password FROM Accounts WHERE email LIKE '%'
@@ -60,14 +65,4 @@ class DBManager(DBManagerInterface):
                 return True
         self.disconnection()
         return False
-
-    def _variables(self):
-        """
-        Gets all the values in the entrys.
-        """
-        self.name = self.et_name.get()
-        self.surname = self.et_surname.get()
-        self.email = self.et_email.get()
-        self.password = self.et_password.get()
-
         

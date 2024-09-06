@@ -4,11 +4,14 @@ from tkinter import ttk
 
 class EntryPlaceHolder(Entry):
 
-    def __init__(self, master=None, placeholder="INSERT YOUR PLACEHOLDER HERE", bg="white",
-                 font=("verdana", 8, "bold"), fg="black", validate=None, validatecommand=None,
-                 color="gray"):
+    def __init__(self, master=None, placeholder="INSERT YOUR PLACEHOLDER HERE", bg="#0D0D0D",
+                 font=("Arial", 12, "bold"), fg="white", validate=None, validatecommand=None,
+                 color="gray", bdwidth=0, highlightcolor="#8F00FF", highlightbg="white", 
+                 highlightthick=1.7):
         super().__init__(master)
+
         self.estado = True
+
         self.placeholder = placeholder
         self.default_color = fg
         self.validate = validate
@@ -16,8 +19,13 @@ class EntryPlaceHolder(Entry):
         self.placeholder_color = color
         self["bg"] = bg
         self["font"] = font
-        self.bind("<FocusIn>", self.foc_in)
-        self.bind("<FocusOut>", self.foc_out)
+        self["borderwidth"] = bdwidth
+        self["highlightcolor"] = highlightcolor
+        self["highlightbackground"] = highlightbg
+        self["highlightthickness"] = highlightthick
+
+        self.bind("<FocusIn>", self.foc_in, add="+")
+        self.bind("<FocusOut>", self.foc_out, add="+")
 
         self.put_placeholder()
         
