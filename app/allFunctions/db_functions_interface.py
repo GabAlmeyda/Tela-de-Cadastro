@@ -6,21 +6,13 @@ class DBManagerInterface(ABC):
     def connection(self):
         """
         Connects to Database.
-
-        Raises:
-            NotImplementedError: raises an error if the method isn't implemented.
         """
-        raise NotImplementedError("'connection' method needs to be implemented!")
 
     @abstractmethod
     def disconnection(self):
         """
         Disconnects from Database.
-
-        Raises:
-            NotImplementedError: raises an error if the method isn't implemented.
         """
-        raise NotImplementedError("'disconnection' method needs to be implemented!")
     
     def createTable(self):
         """
@@ -38,7 +30,7 @@ class DBManagerInterface(ABC):
     @abstractmethod
     def verifyAccount():
         """"
-        TODO: colocar a docstring certa
+        Checks whether the account is registered.
         """
         pass
 

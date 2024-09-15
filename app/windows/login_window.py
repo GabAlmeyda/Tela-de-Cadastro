@@ -25,7 +25,7 @@ class LoginWindow(WindowInterface, Functions, DBManager):
         self.logo_lb.place(relx=0.05, rely=0.04, relwidth=0.35, relheight=0.13)
 
     def _createButtons(self) -> None:
-        self.bt_continue = Button(self.root, text="Continuar", command=self.verifyAccount)
+        self.bt_continue = Button(self.root, text="Continuar", command=self.loginAction)
         self._releaseButtonLogin()
         self.bt_continue.configure(font=("Arial", 15, "bold"), fg="white", )
         self.bt_continue.bind("<Enter>", self.focusIn)

@@ -1,7 +1,9 @@
 from tkinter import * # type: ignore
 from ..custom_entrys import EntryPlaceHolder
+from .db_functions import DBManager
+from tkinter import messagebox
 
-class Functions:
+class Functions(DBManager):
 
     def __init__(self) -> None:
         self.et_email: EntryPlaceHolder
@@ -27,6 +29,28 @@ class Functions:
         """
         color = self._selectColor(event.widget["bg"])
         event.widget["bg"] = color
+
+    def loginAction(self):
+        """
+        Makes all the confirmations to connect the account and enter the app.
+        """
+        validacao = self.verifyAccount()
+        if validacao:
+            # TODO: método para ir pra tela do app
+            pass
+        else:
+            messagebox.showerror(title="EMPRESA - Conta inexistente", text="A conta inserida não está cadastrada!")
+
+    def registerAction(self):
+        """
+        Makes all confirmations to create an account and enter the app.
+        """
+        validacao = self.verifyAccount()
+        if not validacao:
+            # TODO: método para ir pra tela do app
+            pass
+        else:
+            messagebox.showerror(title="EMPRESA - Conta existente", text="A conta inserida já está cadastrada!")
 
     def validPassword(self, password: str):
         """

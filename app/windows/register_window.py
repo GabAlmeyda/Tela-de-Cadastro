@@ -17,7 +17,7 @@ class RegisterWindow(WindowInterface, Functions, DBManager):
         self._createEntrys()
 
     def _createButtons(self) -> None:
-        self.bt_register = Button(self.root, text="Quero me inscrever!")
+        self.bt_register = Button(self.root, text="Quero me inscrever!", command=self.registerAction)
         self.bt_register.configure(bg="#FF003D", fg="white", font=("Arial", 15, "bold"), 
                                    activeforeground="white", activebackground="#ab022a", bd=0)
         self.bt_register.bind("<Enter>", self.focusIn)
