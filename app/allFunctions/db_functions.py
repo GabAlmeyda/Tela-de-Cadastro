@@ -4,29 +4,26 @@ import sqlite3
 
 class DBManager(DBManagerInterface):
 
-    def __init__(self) -> None:
-        self.createTable()
-
     def verifyAccount(self) -> bool:
-        self.email = self.et_email.get()
-        self.password = self.et_password.get()
-        registration = self._accountRegistration(self.email, self.password)
+        email = self.et_email.get()
+        password = self.et_password.get()
+        registration = self._accountRegistration(email, password)
         if registration:
             return True
         else:
             return False
 
     def addAccount(self) -> bool:
-        self.name = self.et_name.get()
-        self.surname = self.et_surname.get()
-        self.email = self.et_email.get()
-        self.password = self.et_password.get()
-        registration = self._accountRegistration(self.email, self.password)
+        name = self.et_name.get()
+        surname = self.et_surname.get()
+        email = self.et_email.get()
+        password = self.et_password.get()
+        registration = self._accountRegistration(email, password)
         if not registration:
             self.connection()
             self.cursor.execute("""
                 INSERT INTO Accounts(name, surname, email, password) VALUES(?, ?, ?, ?)
-            """, (self.name, self.surname, self.email, self.password))
+            """, (name, surname, email, password))
             self.conn.commit()
             self.disconnection()
             return True
@@ -58,10 +55,18 @@ class DBManager(DBManagerInterface):
         self.cursor.execute(f"""
             SELECT email, password FROM Accounts WHERE email = ?
         """, (email,))
-        accounts: list[str, str] = self.cursor.fetchall()
-        self.disconnection()
-        for reg_email, reg_password in accounts:
+
+        accounts = self.cursor.fetchone()
+        if accounts is not None:
+            reg_email, reg_password = accounts
+
             if reg_email == email and reg_password == password:
+                self.disconnection()
                 return True
+        self.disconnection()
         return False
+    
+if __name__ != "__main__":
+    manager = DBManager()
+    manager.createTable()
         

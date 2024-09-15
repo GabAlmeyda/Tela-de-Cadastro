@@ -36,10 +36,12 @@ class Functions(DBManager):
         """
         validacao = self.verifyAccount()
         if validacao:
+            print("Conta logada com sucesso!")
+            print("Entrando no app")
             # TODO: método para ir pra tela do app
             pass
         else:
-            messagebox.showerror(title="EMPRESA - Conta inexistente", text="A conta inserida não está cadastrada!")
+            messagebox.showerror(title="EMPRESA - Conta inexistente", message="A conta inserida não está cadastrada!")
 
     def registerAction(self):
         """
@@ -47,10 +49,16 @@ class Functions(DBManager):
         """
         validacao = self.verifyAccount()
         if not validacao:
-            # TODO: método para ir pra tela do app
-            pass
+            execucao = self.addAccount()
+            if execucao:
+                print("Conta registrada com sucesso!")
+                print("Entrando no app")
+                # TODO: método para ir pra tela do app
+                pass
+            else:
+                messagebox.showerror(title="EMRPESA - Erro no cadastro", message="Algo deu errado. Tente novamente.")
         else:
-            messagebox.showerror(title="EMPRESA - Conta existente", text="A conta inserida já está cadastrada!")
+            messagebox.showerror(title="EMPRESA - Conta existente", message="A conta inserida já está cadastrada!")
 
     def validPassword(self, password: str):
         """
