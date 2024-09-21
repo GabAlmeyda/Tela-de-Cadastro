@@ -4,8 +4,6 @@ from tkinter import Tk
 class WindowInterface(ABC):
     def __init__(self) -> None:
         self.root = Tk()
-        self.screen()
-        self.widgets()
 
     @abstractmethod
     def screen(self) -> None:

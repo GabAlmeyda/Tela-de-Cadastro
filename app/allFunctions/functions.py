@@ -20,15 +20,17 @@ class Functions(DBManager):
         """
         Changes the background color's of the button when it receives focus, based on the color tuple from the color dictionary.
         """
-        color = self._selectColor(event.widget["bg"])
-        event.widget["bg"] = color
+        if event.widget["state"] != "disabled":
+            color = self._selectColor(event.widget["bg"])
+            event.widget["bg"] = color
 
     def focusOut(self, event) -> None:
         """
         Changes the background color's of the button when it loses focus, based on the color tuple from the color dictionary.
         """
-        color = self._selectColor(event.widget["bg"])
-        event.widget["bg"] = color
+        if event.widget["state"] != "disabled":
+            color = self._selectColor(event.widget["bg"])
+            event.widget["bg"] = color
 
     def loginAction(self):
         """
@@ -38,7 +40,7 @@ class Functions(DBManager):
         if validacao:
             print("Conta logada com sucesso!")
             print("Entrando no app")
-            # TODO: método para ir pra tela do app
+            # TODO: colocar o método para ir para AppWindow
             pass
         else:
             messagebox.showerror(title="EMPRESA - Conta inexistente", message="A conta inserida não está cadastrada!")
@@ -53,7 +55,7 @@ class Functions(DBManager):
             if execucao:
                 print("Conta registrada com sucesso!")
                 print("Entrando no app")
-                # TODO: método para ir pra tela do app
+                # TODO: colocar o método para ir para AppWindow
                 pass
             else:
                 messagebox.showerror(title="EMRPESA - Erro no cadastro", message="Algo deu errado. Tente novamente.")

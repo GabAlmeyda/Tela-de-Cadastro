@@ -1,0 +1,3 @@
+* As janelas LoginWindow e RegisterWindow não tem como trocarem de uma para a outra;
+* A tela de LoginWindow só tem o botão de logar, não o de registrar;
+* A tela de LoginWindow tem um botão que dá erro quando entra na área;
