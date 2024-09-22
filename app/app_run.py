@@ -2,8 +2,6 @@ from tkinter import *
 from app import WindowInterface
 from app import EntryPlaceHolder
 from app.allFunctions.functions import Functions
-from app.allFunctions.db_functions import DBManager
-from time import sleep
 
 
 class AppManager:
@@ -15,6 +13,12 @@ class AppManager:
     def changeWindow(actual_window: WindowInterface, new_window: WindowInterface):
         actual_window.destroy()
         new_window.run()
+
+    @classmethod
+    def goToAppWindow(cls, root: Tk, verifyFunction: any):
+        validation = verifyFunction()
+        if validation:
+            cls.changeWindow(actual_window=root, new_window=AppWindow())
 
 
 # start of the class "StartWindow"
@@ -85,7 +89,7 @@ class StartWindow(WindowInterface, Functions):
 
 
 # Start of the class "RegisterWindow"
-class RegisterWindow(WindowInterface, Functions, DBManager):
+class RegisterWindow(WindowInterface, Functions):
 
     def __init__(self) -> None:
         super().__init__()
@@ -105,9 +109,8 @@ class RegisterWindow(WindowInterface, Functions, DBManager):
         self._createEntrys()
 
     def _createButtons(self) -> None:
-        self.bt_register = Button(
-        # TODO: colocar o comando de trocar de janela
-            self.root, text="Quero me inscrever!", command=self.registerAction)
+        self.bt_register = Button(self.root, text="Quero me inscrever!", 
+                                  command=lambda: AppManager.goToAppWindow(root=self.root, verifyFunction=self.registerAction))
         self.bt_register.configure(bg="#FF003D", fg="white", font=("Arial", 15, "bold"),
                                    activeforeground="white", activebackground="#ab022a", bd=0)
         self.bt_register.bind("<Enter>", self.focusIn)
@@ -165,7 +168,7 @@ class RegisterWindow(WindowInterface, Functions, DBManager):
 
 
 # Start of the class "LoginWindow"
-class LoginWindow(WindowInterface, Functions, DBManager):
+class LoginWindow(WindowInterface, Functions):
 
     def __init__(self) -> None:
         super().__init__()
@@ -189,10 +192,13 @@ class LoginWindow(WindowInterface, Functions, DBManager):
         self.lb_logo.configure(bg="#0d0d0d", font=("Times New Roman", 45, "bold"), fg="white")
         self.lb_logo.place(relx=0.05, rely=0.04, relwidth=0.35, relheight=0.13)
 
+        self.lb_register = Label(self.root, text="Já tem uma conta?")
+        self.lb_register.configure(bg="#0d0d0d", font=("Arial", 13, "bold"),fg="white")
+        self.lb_register.place(relx=0.35, rely=0.78, relwidth=0.3, relheight=0.07)
+
     def _createButtons(self) -> None:
-        self.bt_continue = Button(
-        # TODO: colocar o comando de mudar a janela
-            self.root, text="Continuar", command=self.loginAction)
+        self.bt_continue = Button(self.root, text="Continuar", 
+                                  command=lambda: AppManager.goToAppWindow(root=self.root, verifyFunction=self.loginAction))
         self._releaseButtonLogin()
         self.bt_continue.configure(font=("Arial", 15, "bold"), fg="white")
         self.bt_continue.bind("<Enter>", self.focusIn)
@@ -207,7 +213,7 @@ class LoginWindow(WindowInterface, Functions, DBManager):
                                    activebackground="#ab022a", activeforeground="white")
         self.bt_register.bind("<Enter>", self.focusIn)
         self.bt_register.bind("<Leave>", self.focusOut)
-        self.bt_register.place
+        self.bt_register.place(relx=0.325, rely=0.85, relwidth=0.35, relheight=0.07)
 
     def _createEntrys(self) -> None:
         self.et_email = EntryPlaceHolder(self.root, placeholder="Digite seu email")
@@ -221,7 +227,7 @@ class LoginWindow(WindowInterface, Functions, DBManager):
 
 
 # Start of the class "AppWindow"
-class AppWindow(WindowInterface):
+class AppWindow(WindowInterface, Functions):
 
     def __init__(self) -> None:
         super().__init__()

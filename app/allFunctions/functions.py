@@ -1,4 +1,4 @@
-from tkinter import * # type: ignore
+from tkinter import *
 from ..custom_entrys import EntryPlaceHolder
 from .db_functions import DBManager
 from tkinter import messagebox
@@ -32,22 +32,26 @@ class Functions(DBManager):
             color = self._selectColor(event.widget["bg"])
             event.widget["bg"] = color
 
-    def loginAction(self):
-        """
-        Makes all the confirmations to connect the account and enter the app.
+    def loginAction(self) -> bool:
+        """Makes all the confirmations to connect the account and enter the app.
+
+        Returns:
+            bool: returns True if the login process was successful, otherwise it returns False.
         """
         validacao = self.verifyAccount()
         if validacao:
             print("Conta logada com sucesso!")
             print("Entrando no app")
-            # TODO: colocar o método para ir para AppWindow
-            pass
+            return True
         else:
             messagebox.showerror(title="EMPRESA - Conta inexistente", message="A conta inserida não está cadastrada!")
+        return False
 
-    def registerAction(self):
-        """
-        Makes all confirmations to create an account and enter the app.
+    def registerAction(self) -> bool:
+        """Makes all confirmations to create an account and enter the app.
+
+        Returns:
+            bool: returns True if the register process was successful, otherwise it returns False.
         """
         validacao = self.verifyAccount()
         if not validacao:
@@ -55,12 +59,12 @@ class Functions(DBManager):
             if execucao:
                 print("Conta registrada com sucesso!")
                 print("Entrando no app")
-                # TODO: colocar o método para ir para AppWindow
-                pass
+                return True
             else:
                 messagebox.showerror(title="EMRPESA - Erro no cadastro", message="Algo deu errado. Tente novamente.")
         else:
             messagebox.showerror(title="EMPRESA - Conta existente", message="A conta inserida já está cadastrada!")
+        return False
 
     def validPassword(self, password: str):
         """
@@ -98,15 +102,6 @@ class Functions(DBManager):
                 self.et_password2["highlightbackground"] = "white"
                 self.et_password2["fg"] = "white"
                 return True
-
-    def goToAppWindow(self, root: Tk):
-        """
-        Destroys the actual window and goes to the App Window.
-
-        Args:
-            root (Tk): the actual window.
-        """
-        root.destroy()
 
     def _releaseButtonLogin(self, event=None):
         """
