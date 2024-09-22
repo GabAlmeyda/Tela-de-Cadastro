@@ -1,1 +1,0 @@
-* As telas de LoginWindow e RegisterWindow não abrem a tela de AppWindow;
